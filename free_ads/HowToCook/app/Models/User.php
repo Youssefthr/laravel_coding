@@ -44,6 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    #one user has many posts
+    public function posts(){
+        return $this->hasMany(Posts::class);
+    }
+
     ## how to match user with its unique profile
     public function profile(){
         return $this->hasOne(Profile::class);
