@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     #one user has many posts
     public function posts(){
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
     }
 
     ## how to match user with its unique profile
