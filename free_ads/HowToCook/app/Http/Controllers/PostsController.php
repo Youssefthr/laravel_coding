@@ -11,6 +11,13 @@ class PostsController extends Controller
     }
 
     public function store(){
-        return view('posts/');
+        $validatedData = request()->validate([
+            'caption' => 'required',
+            'image' => ['required', 'image'],
+        ]);
+
+        auth()->user()->posts()->create($validatedData);
+
+        dd(request()->all());
     }
-}
+} 
