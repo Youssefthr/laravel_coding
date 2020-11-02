@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
@@ -21,6 +22,9 @@ class PostsController extends Controller
         ]);
         
         $imagePath = request('image')->store('uploads', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
+        
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit (1200, 1000); #cut the image to have perfect square -use intervention/image
+        $image->save();
 
         auth()->user()->posts()->create([
             'caption' => $validatedData['caption'],
