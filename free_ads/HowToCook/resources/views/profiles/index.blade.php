@@ -7,7 +7,10 @@
        <img src="/svg/BigLogo.svg" style="width: 90%;" alt="logo">
        </div>
        <div class="col-9 pt-5">
+       <div class="d-flex justify-content-between align-items-baseline"> 
             <div><h1>{{ $user->nickname }}</h1></div>
+            <a href="#"> ADD NEW POST</a>
+        </div> 
             <div class="d-flex">
                 <div class="pr-5"><strong>153</strong> posts</div>
                 <div class="pr-5"><strong>23k</strong> followers</div>
