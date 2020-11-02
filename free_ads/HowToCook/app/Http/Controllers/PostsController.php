@@ -18,6 +18,10 @@ class PostsController extends Controller
     public function store(){
         $validatedData = request()->validate([
             'caption' => 'required',
+            'category'=> 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'location' => 'required',
             'image' => ['required', 'image'],
         ]);
         
@@ -28,6 +32,10 @@ class PostsController extends Controller
 
         auth()->user()->posts()->create([
             'caption' => $validatedData['caption'],
+            'caption' => $validatedData['category'],
+            'caption' => $validatedData['description'],
+            'caption' => $validatedData['price'],
+            'caption' => $validatedData['location'],
             'image' => $imagePath,
         ]);
 
