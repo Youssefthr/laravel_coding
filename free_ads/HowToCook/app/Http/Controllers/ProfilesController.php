@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class ProfilesController extends Controller
 {
-    public function index($user) #$user is the id of the user
-    {
-        $user = User::findOrFail($user); ##proper response if the profile doesn't exist
-        return view('profiles/index', [
-            'user' => $user,
-        ]);
+    public function index(User $user){ #$user is the id of the user
+        return view('profiles/index', compact('user')); #compact function mean 'user' => $use
+    }
+
+    public function edit(User $user){
+        return view('profiles/edit', compact('user'));
     }
 }

@@ -11,6 +11,7 @@
             <div><h1>{{ $user->nickname }}</h1></div>
             <a href="/post/create"> ADD NEW POST</a>
         </div> 
+        <a href="/profile/{{ $user->id }}/edit"> EDIT PROFIL</a>
             <div class="d-flex">
                 <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
                 <div class="pr-5"><strong>23k</strong> followers</div>
@@ -25,10 +26,10 @@
                 <diV class="col-4  pl-3 .align-self-*-start">
                     <div class="pb-2 pl-0"> <img src="/storage/{{ $post->image }}" class="w-100" alt="post image"> </div>  
                         <div>
-                            <div class="pb-2"><h4>{{ $post->caption }}</h4></div>
+                            <div class="pb-2" style="font-size:20px">{{ $post->caption }}</div>
                             <div class="pb-2">{{ $post->category }}</div>
                             <div class="pb-2">{{ $post->description }}</div>
-                            <div class="pb-2"> PRICE : {{ $post->price }}</div>
+                            <div class="pb-2"> PRICE : {{ $post->price }} €</div>
                             <div class="pb-5"><i class="material-icons pr-2">&#xe55f;</i> {{ $post->location }}</div>  
                         </div>
                 </div>
