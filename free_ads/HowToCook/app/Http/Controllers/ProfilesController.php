@@ -23,7 +23,7 @@ class ProfilesController extends Controller
         $this->authorize('update', $user->profile);
         $validatedData = request()->validate([
             'title' => 'required',
-            'description' => 'required',
+            'description' => '',
             'url' => '',
             'image' => '',
         ]);
@@ -33,11 +33,12 @@ class ProfilesController extends Controller
             $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
             $image = Image::make(public_path("storage/{$imagePath}"))->fit (1000, 1000); #cut the image to have perfect square -use intervention/image
             $image->save();
+            $imageArray = ['image' => $imagePath];
         }
 
-        auth()->user()->profile->update(array_merge
-            ($validatedData, 
-            ['image' => $imagePath],
+        auth()->user()->profile->update(array_merge(
+            $validatedData, 
+            $imageArray ?? [],
         )); #auth means, user has to authenticate if he wants to access to update
 
         return redirect("profile/{$user->id}");
