@@ -23,11 +23,11 @@
        <div class="row pt-5">
         @foreach($user->posts as $post)
         <div class="col-4 pb-4"> <img src="/storage/{{ $post->image }}" class="w-100" alt="post image"> </div>  
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>     
+        <div>{{ $post->caption }}</div>
+        <div>{{ $post->category }}</div>
+        <div>{{ $post->description }}</div>
+        <div>{{ $post->price }}</div>
+        <div>{{ $post->location }}</div>     
         @endforeach
        </div>
    </div>

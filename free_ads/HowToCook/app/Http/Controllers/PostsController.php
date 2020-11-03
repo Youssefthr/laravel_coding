@@ -32,10 +32,10 @@ class PostsController extends Controller
 
         auth()->user()->posts()->create([
             'caption' => $validatedData['caption'],
-            'caption' => $validatedData['category'],
-            'caption' => $validatedData['description'],
-            'caption' => $validatedData['price'],
-            'caption' => $validatedData['location'],
+            'category' => $validatedData['category'],
+            'description' => $validatedData['description'],
+            'price' => $validatedData['price'],
+            'location' => $validatedData['location'],
             'image' => $imagePath,
         ]);
 
