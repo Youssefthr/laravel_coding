@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProfilesController extends Controller
 {
@@ -27,7 +28,17 @@ class ProfilesController extends Controller
             'image' => '',
         ]);
 
-        auth()->user()->profile->update($validatedData); #auth means, user has to authenticate if he wants to access to update
+
+        if (request('image')) {
+            $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit (1000, 1000); #cut the image to have perfect square -use intervention/image
+            $image->save();
+        }
+
+        auth()->user()->profile->update(array_merge
+            ($validatedData, 
+            ['image' => $imagePath],
+        )); #auth means, user has to authenticate if he wants to access to update
 
         return redirect("profile/{$user->id}");
     }

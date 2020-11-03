@@ -4,7 +4,7 @@
 <div class="container .flex-*-wrap">
    <div class="row">
        <div class="col-3 p-5">
-       <img src="/svg/BigLogo.svg" style="width: 90%;" alt="logo">
+       <img src="/storage/{{ $user->profile->image }}" class="rounded-circle w-100" alt="logo">
        </div>
        <div class="col-9 pt-5">
        <div class="d-flex justify-content-between align-items-baseline"> 
