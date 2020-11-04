@@ -38,7 +38,7 @@ class ProfilesController extends Controller
 
         auth()->user()->profile->update(array_merge(
             $validatedData, 
-            $imageArray ?? [],
+            $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
         )); #auth means, user has to authenticate if he wants to access to update
 
         return redirect("profile/{$user->id}");

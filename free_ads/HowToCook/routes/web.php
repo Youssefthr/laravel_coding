@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\NewUserWelcomeMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,10 @@ Route::get('/', function () {
 
 #register and sign in
 Auth::routes();
+
+Route::get('/email', function(){
+    return new NewUserWelcomeMail();
+});
 
 #Show the post form
 Route::get('/post/create', [App\Http\Controllers\PostsController::class, 'create']);
