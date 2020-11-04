@@ -35,10 +35,10 @@ Route::get('/post/create', [App\Http\Controllers\PostsController::class, 'create
 Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
 
 #Show the form post
-Route::get('/post/{post}/{user}/edit', [App\Http\Controllers\PostsController::class, 'edit'])->name('post.edit');
+Route::get('/post/{post}/{user}/edit', [App\Http\Controllers\PostsController::class, 'edit'])->name('post.edit'); ## OK
 
 #Update the post
-Route::patch('/profile/{user}', [App\Http\Controllers\PostsController::class, 'update'])->name('post.update');
+Route::patch('/profile/{user}', [App\Http\Controllers\PostsController::class, 'update'])->name('post.update');  ## ???
 
 #Show profile
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');

@@ -51,22 +51,22 @@ class PostsController extends Controller
     }
 
     public function edit(Post $post){
-        #$this->authorize('update', $post->user_id);
+
+        $this->authorize('update', $post);
         return view('posts/edit', compact('post'));
     }
 
     public function update(Post $post){
 
-        #$this->authorize('update', $post->user_id);
+        $this->authorize('update', $post);
         $validatedData = request()->validate([
-            'caption' => 'required',
+            'caption' => '',
             'category' => '',
             'description' => '',
-            'price' => 'required',
-            'location' => 'required',
+            'price' => '',
+            'location' => '',
             'image' => '',
         ]);
-
 
         if (request('image')) {
             $imagePath = request('image')->store('post', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
@@ -80,7 +80,6 @@ class PostsController extends Controller
             $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
         )); #auth means, user has to authenticate if he wants to access to update
 
-        return redirect("profile/{$post->user_id}");
+        return redirect("profile/{$user->id}");
     }
-
 }   

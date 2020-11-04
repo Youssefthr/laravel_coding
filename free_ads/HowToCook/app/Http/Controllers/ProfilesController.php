@@ -43,12 +43,17 @@ class ProfilesController extends Controller
             $imageArray = ['image' => $imagePath];
         }
 
+        $passArray = ['password' => hash('sha256', request('password'))];
+
         auth()->user()->profile->update(array_merge(
             $validatedDataProfile, 
             $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
         )); #auth means, user has to authenticate if he wants to access to update
 
-        auth()->user()->update($validatedDataUser); 
+        auth()->user()->update(array_merge(
+            $validatedDataUser,
+            $passArray ?? [], 
+        )); 
 
         return redirect("profile/{$user->id}");
     }
