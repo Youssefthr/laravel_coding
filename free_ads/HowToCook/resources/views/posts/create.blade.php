@@ -21,6 +21,58 @@
                     @enderror
         </div>
 
+        <div class="form-group row">
+            <label for="category" class="col-md-4 col-form-label">{{ __('Post category') }}</label>
+            <input id="category" 
+                    type="text"
+                    class="form-control @error('category') is-invalid @enderror"
+                    name="category"
+                    value="{{ old('category') }}"
+                    required autocomplete="category" autofocus>   
+                    @error('category')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
+        <div class="form-group row">
+            <label for="description" class="col-md-4 col-form-label">{{ __('Post description') }}</label>
+            <input id="description" 
+                    type="text"
+                    class="form-control @error('description') is-invalid @enderror"
+                    name="description"
+                    value="{{ old('description') }}"
+                    required autocomplete="description" autofocus>   
+                    @error('description')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
+        <div class="form-group row">
+            <label for="price" class="col-md-4 col-form-label">{{ __('Post price') }}</label>
+            <input id="price" 
+                    type="text"
+                    class="form-control @error('price') is-invalid @enderror"
+                    name="price"
+                    value="{{ old('price') }}"
+                    required autocomplete="price" autofocus>   
+                    @error('price')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
+        <div class="form-group row">
+            <label for="location" class="col-md-4 col-form-label">{{ __('Post location') }}</label>
+            <input id="location" 
+                    type="text"
+                    class="form-control @error('location') is-invalid @enderror"
+                    name="location"
+                    value="{{ old('location') }}"
+                    required autocomplete="location" autofocus>   
+                    @error('location')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
         <div class="row">
             <label for="image" class="col-md-4 col-form-label">{{ __('Post Image') }}</label>
             <input type="file" class="form-control-file" id="image" name="image">

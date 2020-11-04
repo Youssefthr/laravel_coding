@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\NewUserWelcomeMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +14,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+#register and sign in
 Auth::routes();
 
+#Show home page with post when you are not log in
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+
+Route::get('/email', function(){
+    return new NewUserWelcomeMail();
+});
+
+#Show home page with posts when you are log-in 
+Route::get('/', [App\Http\Controllers\PostsController::class, 'index']);
+
+#Show the post form
 Route::get('/post/create', [App\Http\Controllers\PostsController::class, 'create']);
 
+#Save img, description, caption etc into DB
 Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
 
+#Show profile
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
+
+#Show the form profile
+Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])->name('profile.edit');
+
+#Update the profile when profile is already created
+Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'update'])->name('profile.update');

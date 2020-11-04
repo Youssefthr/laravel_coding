@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex" href="{{ url('/home') }}">
                     <div> <img src="/svg/SmallLogo.svg" alt="logo" style="height: 30px; border-right: 1px solid #333333;"  class="pr-3"> </div>
                     <div class="pl-3"> HowToCook </div>
                 </a>
@@ -60,6 +62,12 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('profile.show', auth()->user()->id) }}">                                                    
+                                        {{ __('Profile') }}
+                                    </a>
+                                    <a class="dropdown-item" href="/home">                                                    
+                                        {{ __('Home Page') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
