@@ -21,13 +21,20 @@ class ProfilesController extends Controller
     public function update(User $user){
 
         $this->authorize('update', $user->profile);
-        $validatedData = request()->validate([
+        $validatedDataProfile = request()->validate([
             'title' => 'required',
             'description' => '',
             'url' => '',
             'image' => '',
         ]);
-
+        
+        $validatedDataUser = request()->validate([
+            'login' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'nickname' => 'required',
+        ]);
 
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
@@ -37,9 +44,11 @@ class ProfilesController extends Controller
         }
 
         auth()->user()->profile->update(array_merge(
-            $validatedData, 
+            $validatedDataProfile, 
             $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
         )); #auth means, user has to authenticate if he wants to access to update
+
+        auth()->user()->update($validatedDataUser); 
 
         return redirect("profile/{$user->id}");
     }

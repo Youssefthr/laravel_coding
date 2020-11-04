@@ -49,4 +49,38 @@ class PostsController extends Controller
 
         return redirect('/profile/' . auth()->user()->id);
     }
+
+    public function edit(Post $post){
+        #$this->authorize('update', $post->user_id);
+        return view('posts/edit', compact('post'));
+    }
+
+    public function update(Post $post){
+
+        #$this->authorize('update', $post->user_id);
+        $validatedData = request()->validate([
+            'caption' => 'required',
+            'category' => '',
+            'description' => '',
+            'price' => 'required',
+            'location' => 'required',
+            'image' => '',
+        ]);
+
+
+        if (request('image')) {
+            $imagePath = request('image')->store('post', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit (1000, 1000); #cut the image to have perfect square -use intervention/image
+            $image->save();
+            $imageArray = ['image' => $imagePath];
+        }
+
+        auth()->user()->post->update(array_merge(
+            $validatedData, 
+            $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
+        )); #auth means, user has to authenticate if he wants to access to update
+
+        return redirect("profile/{$post->user_id}");
+    }
+
 }   
