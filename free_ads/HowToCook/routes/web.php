@@ -14,9 +14,6 @@ use App\Mail\NewUserWelcomeMail;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 #register and sign in
 Auth::routes();
@@ -24,6 +21,8 @@ Auth::routes();
 Route::get('/email', function(){
     return new NewUserWelcomeMail();
 });
+
+Route::get('/', [App\Http\Controllers\PostsController::class, 'index']);
 
 #Show the post form
 Route::get('/post/create', [App\Http\Controllers\PostsController::class, 'create']);

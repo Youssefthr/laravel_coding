@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
+    public function index(){
+        $posts = Post::orderBy('created_at', 'DESC')->get();
+        return view('posts/index', compact('posts'));
+    }
+
     public function __construct(){
         $this->middleware('auth'); ##you need to authenticate if you want to access to other method
     }
