@@ -25,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex" href="{{ url('/home') }}">
                     <div> <img src="/svg/SmallLogo.svg" alt="logo" style="height: 30px; border-right: 1px solid #333333;"  class="pr-3"> </div>
                     <div class="pl-3"> HowToCook </div>
                 </a>
@@ -65,6 +65,9 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('profile.show', auth()->user()->id) }}">                                                    
                                         {{ __('Profile') }}
+                                    </a>
+                                    <a class="dropdown-item" href="/home">                                                    
+                                        {{ __('Home Page') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

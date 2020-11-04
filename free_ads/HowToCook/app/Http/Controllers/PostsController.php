@@ -9,13 +9,14 @@ use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
-    public function index(){
-        $posts = Post::orderBy('created_at', 'DESC')->get();
-        return view('posts/index', compact('posts'));
-    }
 
     public function __construct(){
         $this->middleware('auth'); ##you need to authenticate if you want to access to other method
+    }
+
+    public function index(){
+        $posts = Post::orderBy('created_at', 'DESC')->get();
+        return view('posts/index', compact('posts'));
     }
 
     public function create(){

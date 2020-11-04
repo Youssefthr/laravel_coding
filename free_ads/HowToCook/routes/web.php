@@ -18,10 +18,14 @@ use App\Mail\NewUserWelcomeMail;
 #register and sign in
 Auth::routes();
 
+#Show home page with post when you are not log in
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+
 Route::get('/email', function(){
     return new NewUserWelcomeMail();
 });
 
+#Show home page with posts when you are log-in 
 Route::get('/', [App\Http\Controllers\PostsController::class, 'index']);
 
 #Show the post form
