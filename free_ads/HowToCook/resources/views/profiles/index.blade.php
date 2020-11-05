@@ -14,18 +14,18 @@
             <a href="/post/create"> ADD NEW POST</a>
             @endcan
         </div> 
-
+    <div class='d-flex align-items-start'>
         @can('update', $user->profile)
-        <a href="/profile/{{ $user->id }}/edit"> EDIT PROFIL</a>
+        <a class="pt-2" href="/profile/{{ $user->id }}/edit"> EDIT PROFIL</a>
         <form method="POST" action="/profile/{{ $user->id }}">
         @csrf
         @method('DELETE')
-        <div class="form-group">
-            <input type="submit" class="btn btn-danger delete-user" value="DELETE PROFIL">
+        <div class="form-group, mb-2 ml-3 pt-0">
+            <input type="submit" class="btn" style="color:red" value="DELETE PROFIL" onclick="return confirm('Are you sure you want to delete this item?');">
         </div>
         </form>
         @endcan
-
+    </div>
             <div class="d-flex">
                 <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
                 <div class="pr-5"><strong>23k</strong> followers</div>
@@ -49,12 +49,12 @@
                                         <div class="pb-0 mb-3"><i class="material-icons pr-2">&#xe55f;</i> {{ $post->location }}</div>  
                                     </div>
                                     @can('update', $user->profile)
-                                        <div class="pr-3 pb-3"> <a href="/post/{{ $post->id }}/{{ $user->id }}/edit" class="btn btn-primary">EDIT POST</a></div>
+                                        <div class="pr-3 pb-3"> <a href="/post/{{ $post->id }}/{{ $user->id }}/edit" class="btn btn-primary btn-sm">EDIT POST</a></div>
                                         <form method="POST" action="/post/{{ $post->id }}/{{ $post->user_id }}">
                                             @csrf
                                             @method('DELETE')
                                             <div class="form-group">
-                                                <input type="submit" class="btn btn-danger delete-user" value="DELETE POST">
+                                                <input type="submit" class="btn btn-danger delete-user btn-sm" onclick="return confirm('Are you sure you want to delete this item?');" value="DELETE POST">
                                             </div>
                                             </form>
                                     @endcan
