@@ -9,7 +9,7 @@
    <div class="row">
        <div class="row pt-5">
 
-       @for($post = 1; $post<=($page_index+1)*9; $post++)
+       @for($post=$page_index*9; $post<($page_index+1)*9; $post++)
                     @if(count($posts)>$post)
                     <diV class="col-4  pl-3 .align-self-*-start">
                         <div class="pb-2 pl-0"> <img src="/storage/{{ $posts[$post]->image }}" class="w-100" alt="post image"> </div>  
