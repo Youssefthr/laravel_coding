@@ -8,7 +8,7 @@
        </div>
        <div class="col-9 pt-5">
        <div class="d-flex justify-content-between align-items-baseline"> 
-            <div><h1>{{ $user->nickname }}</h1></div>
+            <div><h1></h1></div>
 
             @can('update', $user->profile)
             <a href="/post/create"> ADD NEW POST</a>
@@ -17,6 +17,13 @@
 
         @can('update', $user->profile)
         <a href="/profile/{{ $user->id }}/edit"> EDIT PROFIL</a>
+        <form method="POST" action="/profile/{{ $user->id }}">
+        @csrf
+        @method('DELETE')
+        <div class="form-group">
+            <input type="submit" class="btn btn-danger delete-user" value="DELETE PROFIL">
+        </div>
+        </form>
         @endcan
 
             <div class="d-flex">
@@ -33,7 +40,7 @@
                     <div class="col-4  pl-3 .align-self-*-start">
                         <div class="pb-2 pl-0"> <img src="/storage/{{ $post->image }}" class="w-100" alt="post image"> </div>  
                             <div>
-                                <div class="pb-2" style="font-size:20px">{{ $post->caption }} by <span style="color:#3490dc">{{ $post->user->nickname }} </span></div>
+                                <div class="pb-2" style="font-size:20px">{{ $post->caption }} by <span style="color:#3490dc"> {{ $post->user->nickname }} </span></div>
                                 <div class="d-flex align-items-end justify-content-between">
                                     <div>
                                         <div class="pb-2">{{ $post->category }}</div>
@@ -43,6 +50,13 @@
                                     </div>
                                     @can('update', $user->profile)
                                         <div class="pr-3 pb-3"> <a href="/post/{{ $post->id }}/{{ $user->id }}/edit" class="btn btn-primary">EDIT POST</a></div>
+                                        <form method="POST" action="/post/{{ $post->id }}/{{ $post->user_id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-danger delete-user" value="DELETE POST">
+                                            </div>
+                                            </form>
                                     @endcan
                                 </div>
                             </div>

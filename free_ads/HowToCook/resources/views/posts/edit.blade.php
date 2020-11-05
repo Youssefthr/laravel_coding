@@ -86,15 +86,7 @@
         </div>
         <div class='d-flex justify-content-between'>
                 <div class="row pt-4">
-                        <button class="btn btn-primary">Save Post</button>
-                </div>
-
-                <div>
-                <form method="post" action="/post/{{ $post->id }}/{{ $post->user_id }}"> 
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger mt-4" type="submit">Delete Post</button>
-                </form>
+                        <input type="submit" value="Save Post" name="form_post_save" >
                 </div>
         </div>
     </div>

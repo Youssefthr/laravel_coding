@@ -43,7 +43,8 @@
                                         <div class="pb-0 mb-3"><i class="material-icons pr-2">&#xe55f;</i> {{ $posts[$post]->location }}</div>  
                                     </div>
                                     @auth
-                                        <div class="pr-3 pb-3"> <a href="mailto:{{ $posts[$post]->user->email }}" class="btn btn-primary">Ready to Cook !</a></div>                                    @else
+                                        <div class="pr-3 pb-3"> <a href="/profile/{{ $posts[$post]->user_id }}" class="btn btn-primary">Ready to Cook !</a></div>           
+                                    @else
                                         <div class="pr-3 pb-3"> <a href="{{ route('register') }}" class="btn btn-primary">Ready to Cook !</a></div>
                                     @endif
                                 </div>
