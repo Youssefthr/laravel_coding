@@ -48,6 +48,71 @@
                     @enderror
         </div>
 
+        <div class="form-group row">
+            <label for="login" class="col-md-4 col-form-label">{{ __('login') }}</label>
+            <input id="login" 
+                    type="login"
+                    class="form-control @error('login') is-invalid @enderror"
+                    name="login"
+                    value="{{ old('login') ?? $user->login }}"
+                    >   
+                    @error('login')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
+        <div class="form-group row">
+            <label for="password" class="col-md-4 col-form-label">{{ __('password') }}</label>
+            <input id="password" 
+                    type="password"
+                    class="form-control @error('password') is-invalid @enderror"
+                    name="password"
+                    value="{{ old('password') ?? $user->password }}"
+                    >   
+                    @error('password')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
+        <div class="form-group row">
+            <label for="email" class="col-md-4 col-form-label">{{ __('email') }}</label>
+            <input id="email" 
+                    type="email"
+                    class="form-control @error('email') is-invalid @enderror"
+                    name="email"
+                    value="{{ old('email') ?? $user->email }}"
+                    >   
+                    @error('email')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
+        <div class="form-group row">
+            <label for="phone" class="col-md-4 col-form-label">{{ __('phone') }}</label>
+            <input id="phone" 
+                    type="phone"
+                    class="form-control @error('phone') is-invalid @enderror"
+                    name="phone"
+                    value="{{ old('phone') ?? $user->phone }}"
+                    >   
+                    @error('phone')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
+        <div class="form-group row">
+            <label for="nickname" class="col-md-4 col-form-label">{{ __('nickname') }}</label>
+            <input id="nickname" 
+                    type="nickname"
+                    class="form-control @error('nickname') is-invalid @enderror"
+                    name="nickname"
+                    value="{{ old('nickname') ?? $user->nickname }}"
+                    >   
+                    @error('nickname')
+                            <strong>{{ $message }}</strong>
+                    @enderror
+        </div>
+
         <div class="row">
             <label for="image" class="col-md-4 col-form-label">{{ __('Profile Image') }}</label>
             <input type="file" class="form-control-file" id="image" name="image"
