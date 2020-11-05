@@ -2,19 +2,21 @@
 
 @section('content')
 <div class="container">
-
-<form action='/post' method="post" enctype="multipart/form-data">
+<form action='/profile/{{ $post->user_id }}' method="post" enctype="multipart/form-data">
 {{--protect your application from cross-site request forgery (CSRF) attacks--}}
 @csrf 
+@method('PATCH')
+
     <div class="col-8 offset-2">
-        <div class="row"><h2>ADD NEW POST</h2></div>
+        <div class="row"><h2>Edit Post</h2></div>
+
         <div class="form-group row">
-            <label for="caption" class="col-md-4 col-form-label">{{ __('Post Caption') }}</label>
+            <label for="caption" class="col-md-4 col-form-label">{{ __('Caption') }}</label>
             <input id="caption" 
                     type="text"
                     class="form-control @error('caption') is-invalid @enderror"
                     name="caption"
-                    value="{{ old('caption') }}"
+                    value="{{ old('caption') ?? $post->caption }}"
                     required autocomplete="caption" autofocus>   
                     @error('caption')
                             <strong>{{ $message }}</strong>
@@ -22,52 +24,52 @@
         </div>
 
         <div class="form-group row">
-            <label for="category" class="col-md-4 col-form-label">{{ __('Post category') }}</label>
+            <label for="category" class="col-md-4 col-form-label">{{ __('Category') }}</label>
             <input id="category" 
                     type="text"
                     class="form-control @error('category') is-invalid @enderror"
                     name="category"
-                    value="{{ old('category') }}"
-                    required autocomplete="category" autofocus>   
+                    value="{{ old('category') ?? $post->category }}"
+                    >   
                     @error('category')
                             <strong>{{ $message }}</strong>
                     @enderror
         </div>
 
         <div class="form-group row">
-            <label for="description" class="col-md-4 col-form-label">{{ __('Post description') }}</label>
+            <label for="description" class="col-md-4 col-form-label">{{ __('Description') }}</label>
             <input id="description" 
-                    type="text"
+                    type="description"
                     class="form-control @error('description') is-invalid @enderror"
                     name="description"
-                    value="{{ old('description') }}"
-                    required autocomplete="description" autofocus>   
+                    value="{{ old('description') ?? $post->description }}"
+                    >   
                     @error('description')
                             <strong>{{ $message }}</strong>
                     @enderror
         </div>
 
         <div class="form-group row">
-            <label for="price" class="col-md-4 col-form-label">{{ __('Post price') }}</label>
+            <label for="price" class="col-md-4 col-form-label">{{ __('Price') }}</label>
             <input id="price" 
-                    type="text"
+                    type="price"
                     class="form-control @error('price') is-invalid @enderror"
                     name="price"
-                    value="{{ old('price') }}"
-                    required autocomplete="price" autofocus>   
+                    value="{{ old('price') ?? $post->price }}"
+                    >   
                     @error('price')
                             <strong>{{ $message }}</strong>
                     @enderror
         </div>
 
         <div class="form-group row">
-            <label for="location" class="col-md-4 col-form-label">{{ __('Post location') }}</label>
+            <label for="location" class="col-md-4 col-form-label">{{ __('Location') }}</label>
             <input id="location" 
-                    type="text"
+                    type="location"
                     class="form-control @error('location') is-invalid @enderror"
                     name="location"
-                    value="{{ old('location') }}"
-                    required autocomplete="location" autofocus>   
+                    value="{{ old('location') ?? $post->location }}"
+                    >   
                     @error('location')
                             <strong>{{ $message }}</strong>
                     @enderror
@@ -75,21 +77,19 @@
 
         <div class="row">
             <label for="image" class="col-md-4 col-form-label">{{ __('Post Image') }}</label>
-            <input type="file" class="form-control-file" id="image" name="image">
+            <input type="file" class="form-control-file" id="image" name="image"
+                   value="{{ old('image') ?? $post->image }}"
+                    >
                     @error('image')
                             <strong>{{ $message }}</strong>
                     @enderror
         </div>
 
         <div class="row pt-4">
-            <button class="btn btn-primary"> Add New Post</button>
-
+            <button class="btn btn-primary">Save Post</button>
         </div>
     </div>
 </form>
-    
+   
 </div>
 @endsection
-
-
-
