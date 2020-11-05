@@ -9,7 +9,8 @@
    <div class="row">
        <div class="row pt-5">
 
-       @for($post = $page_index*10; $post<=($page_index+1)*10; $post++)
+       @for($post = 1; $post<=($page_index+1)*9; $post++)
+                    @if(count($posts)>$post)
                     <diV class="col-4  pl-3 .align-self-*-start">
                         <div class="pb-2 pl-0"> <img src="/storage/{{ $posts[$post]->image }}" class="w-100" alt="post image"> </div>  
                             <div>
@@ -32,21 +33,20 @@
                                 </div>
                             </div>
                     </div>
+                @endif
             @endfor
        </div>
    </div>
 </div>
 
-<nav aria-label="...">
-  <ul class="pagination">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
     <li class="page-item disabled">
       <a class="page-link" href="#" tabindex="-1">Previous</a>
     </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item active">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    @for ($i=0; $i< ceil(count($posts)/9); $i++)
+        <li class="page-item"><a class="page-link" href="/home/page{{ $i }}">{{ $i+1 }}</a></li>
+    @endfor
     <li class="page-item">
       <a class="page-link" href="#">Next</a>
     </li>
