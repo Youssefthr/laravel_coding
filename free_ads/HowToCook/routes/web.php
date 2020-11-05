@@ -38,14 +38,13 @@ Route::get('/post/create', [App\Http\Controllers\PostsController::class, 'create
 Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
 
 #Show the form post
-Route::get('/post/{post}/{user}/edit', [App\Http\Controllers\PostsController::class, 'edit'])->name('post.edit'); ## OK
+Route::get('/post/{post}/{user}/edit', [App\Http\Controllers\PostsController::class, 'edit'])->name('post.edit'); 
 
 #Update the post
-Route::patch('/post/{post}/{user}/patch', [App\Http\Controllers\PostsController::class, 'update'])->name('post.update');  ## ???
+Route::patch('/post/{post}/{user}/patch', [App\Http\Controllers\PostsController::class, 'update'])->name('post.update');  
 
-
-
-
+#Delete the post
+Route::delete('/post/{post}/{user}', [App\Http\Controllers\PostsController::class, 'destroy'])->name('post.destroy');
 
 #Show profile
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');

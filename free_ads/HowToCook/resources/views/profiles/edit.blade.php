@@ -80,8 +80,7 @@
                     type="email"
                     class="form-control @error('email') is-invalid @enderror"
                     name="email"
-                    value="{{ old('email') ?? $user->email }}"
-                    >   
+                    value="{{ old('email') ?? $user->email }}">   
                     @error('email')
                             <strong>{{ $message }}</strong>
                     @enderror

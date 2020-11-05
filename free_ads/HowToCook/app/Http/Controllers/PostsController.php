@@ -81,4 +81,11 @@ class PostsController extends Controller
 
         return redirect("profile/{$post->user_id}");
     }
+
+    public function destroy(Post $post){
+        $this->authorize('update', $post);
+        $Post = Post::where('id', $post->id)->get()->first();
+        $Post->delete();
+        return redirect("profile/{$post->user_id}");
+    }
 }   

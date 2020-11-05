@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Hash;
 
 class ProfilesController extends Controller
 {
@@ -36,6 +37,7 @@ class ProfilesController extends Controller
             'nickname' => 'required',
         ]);
 
+
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
             $image = Image::make(public_path("storage/{$imagePath}"))->fit (1000, 1000); #cut the image to have perfect square -use intervention/image
@@ -43,17 +45,15 @@ class ProfilesController extends Controller
             $imageArray = ['image' => $imagePath];
         }
 
-        $passArray = ['password' => hash('sha256', request('password'))];
+        $validatedDataUser['password']= Hash::make($validatedDataUser['password']);
+       
 
         auth()->user()->profile->update(array_merge(
             $validatedDataProfile, 
             $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
         )); #auth means, user has to authenticate if he wants to access to update
 
-        auth()->user()->update(array_merge(
-            $validatedDataUser,
-            $passArray ?? [], 
-        )); 
+        auth()->user()->update($validatedDataUser); 
 
         return redirect("profile/{$user->id}");
     }
