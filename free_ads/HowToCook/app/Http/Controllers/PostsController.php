@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Intervention\Image\Facades\Image;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -14,10 +18,12 @@ class PostsController extends Controller
         $this->middleware('auth'); ##you need to authenticate if you want to access to other method
     }
 
-    public function index(){
-        $posts = Post::orderBy('created_at', 'DESC')->get();
-        return view('posts/index', compact('posts'));
-    }
+    #public function index(){
+        #$posts = Post::orderBy('created_at', 'DESC')->get();
+        #return view('posts/index', compact('posts'));
+        #$post = new Post;
+        #return view('posts/index', compact('post'), compact('page_index'));
+    #}
 
     public function create(){
         return view('posts/create');
@@ -48,5 +54,38 @@ class PostsController extends Controller
         ]);
 
         return redirect('/profile/' . auth()->user()->id);
+    }
+
+    public function edit(Post $post){
+
+        $this->authorize('update', $post);
+        return view('posts/edit', compact('post'));
+    }
+
+    public function update(Post $post){
+
+        $this->authorize('update', $post);
+        $validatedData = request()->validate([
+            'caption' => '',
+            'category' => '',
+            'description' => '',
+            'price' => '',
+            'location' => '',
+            'image' => '',
+        ]);
+
+        if (request('image')) {
+            $imagePath = request('image')->store('post', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit (1000, 1000); #cut the image to have perfect square -use intervention/image
+            $image->save();
+            $imageArray = ['image' => $imagePath];
+        }
+
+        auth()->user()->post->update(array_merge(
+            $validatedData, 
+            $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
+        )); #auth means, user has to authenticate if he wants to access to update
+
+        return redirect("profile/{$user->id}");
     }
 }   

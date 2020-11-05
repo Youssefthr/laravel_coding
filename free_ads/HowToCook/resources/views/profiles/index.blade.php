@@ -8,7 +8,7 @@
        </div>
        <div class="col-9 pt-5">
        <div class="d-flex justify-content-between align-items-baseline"> 
-            <div><h1>{{ $user->profile->title }}</h1></div>
+            <div><h1>{{ $user->nickname }}</h1></div>
 
             @can('update', $user->profile)
             <a href="/post/create"> ADD NEW POST</a>
@@ -30,18 +30,25 @@
 
        <div class="row pt-5">
             @foreach($user->posts as $post)
-                <diV class="col-4  pl-3 .align-self-*-start">
-                    <div class="pb-2 pl-0"> <img src="/storage/{{ $post->image }}" class="w-100" alt="post image"> </div>  
-                        <div>
-                            <div class="pb-2" style="font-size:20px">{{ $post->caption }}</div>
-                            <div class="pb-2">{{ $post->category }}</div>
-                            <div class="pb-2">{{ $post->description }}</div>
-                            <div class="pb-2"> PRICE : {{ $post->price }} €</div>
-                            <div class="pb-5"><i class="material-icons pr-2">&#xe55f;</i> {{ $post->location }}</div>  
-                        </div>
-                </div>
+                    <div class="col-4  pl-3 .align-self-*-start">
+                        <div class="pb-2 pl-0"> <img src="/storage/{{ $post->image }}" class="w-100" alt="post image"> </div>  
+                            <div>
+                                <div class="pb-2" style="font-size:20px">{{ $post->caption }} by <span style="color:#3490dc">{{ $post->user->nickname }} </span></div>
+                                <div class="d-flex align-items-end justify-content-between">
+                                    <div>
+                                        <div class="pb-2">{{ $post->category }}</div>
+                                        <div class="pb-2">{{ $post->description }}</div>
+                                        <div class="pb-2"> PRICE : {{ $post->price }} €</div>
+                                        <div class="pb-0 mb-3"><i class="material-icons pr-2">&#xe55f;</i> {{ $post->location }}</div>  
+                                    </div>
+                                    @can('update', $user->profile)
+                                        <div class="pr-3 pb-3"> <a href="/post/{{ $post->id }}/{{ $user->id }}/edit" class="btn btn-primary">EDIT POST</a></div>
+                                    @endcan
+                                </div>
+                            </div>
+                    </div>
             @endforeach
-       </div>
+        </div>
    </div>
 </div>
 @endsection

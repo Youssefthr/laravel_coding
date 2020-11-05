@@ -23,8 +23,9 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index(){
+    public function index($page_index){ #page number
         $posts = Post::orderBy('created_at', 'DESC')->get();
-        return view('posts/index', compact('posts'));
+        #$post = new Post;
+        return view('posts/index', compact('posts'), compact('page_index'));
     }
 }
