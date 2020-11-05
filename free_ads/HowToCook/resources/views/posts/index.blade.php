@@ -14,6 +14,7 @@
                     <diV class="col-4  pl-3 .align-self-*-start">
                         <div class="pb-2 pl-0"> <img src="/storage/{{ $posts[$post]->image }}" class="w-100" alt="post image"> </div>  
                             <div>
+
                                 <div class="pb-2" style="font-size:20px">
                                     {{ $posts[$post]->caption }} by 
                                     <a style="color:#3490dc" href="/profile/{{ $posts[$post]->user_id }}">{{ $posts[$post]->user->nickname }}</a>
@@ -26,8 +27,7 @@
                                         <div class="pb-0 mb-3"><i class="material-icons pr-2">&#xe55f;</i> {{ $posts[$post]->location }}</div>  
                                     </div>
                                     @auth
-                                        <div class="pr-3 pb-3"> <a href="mailto:{{ $posts[$post]->user->email }}" class="btn btn-primary">Ready to Cook !</a></div>
-                                    @else
+                                        <div class="pr-3 pb-3"> <a href="mailto:{{ $posts[$post]->user->email }}" class="btn btn-primary">Ready to Cook !</a></div>                                    @else
                                         <div class="pr-3 pb-3"> <a href="{{ route('register') }}" class="btn btn-primary">Ready to Cook !</a></div>
                                     @endif
                                 </div>
