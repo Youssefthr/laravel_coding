@@ -66,7 +66,7 @@
                                     <a class="dropdown-item" href="{{ route('profile.show', auth()->user()->id) }}">                                                    
                                         {{ __('Profile') }}
                                     </a>
-                                    <a class="dropdown-item" href="/home">                                                    
+                                    <a class="dropdown-item" href="/home/page0">                                                    
                                         {{ __('Home Page') }}
                                     </a>
 

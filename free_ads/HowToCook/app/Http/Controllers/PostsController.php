@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Intervention\Image\Facades\Image;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -14,10 +18,12 @@ class PostsController extends Controller
         $this->middleware('auth'); ##you need to authenticate if you want to access to other method
     }
 
-    public function index(){
-        $posts = Post::orderBy('created_at', 'DESC')->get();
-        return view('posts/index', compact('posts'));
-    }
+    #public function index(){
+        #$posts = Post::orderBy('created_at', 'DESC')->get();
+        #return view('posts/index', compact('posts'));
+        #$post = new Post;
+        #return view('posts/index', compact('post'), compact('page_index'));
+    #}
 
     public function create(){
         return view('posts/create');
