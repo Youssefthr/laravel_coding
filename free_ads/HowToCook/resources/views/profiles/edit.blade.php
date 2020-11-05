@@ -122,10 +122,19 @@
                     @enderror
         </div>
 
-        <div class="row pt-4">
-            <button class="btn btn-primary">Save Profile</button>
-
+        <div class='d-flex justify-content-between'>
+                <div class="row pt-4">
+                <button class="btn btn-primary">Save Profile</button>
+                </div>
+                <div>
+                        <form method="post" action="/'/profile/{{ $user->id }}"> 
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger mt-4" type="submit">Delete Post</button>
+                        </form>
+                </div>
         </div>
+
     </div>
 </form>
    

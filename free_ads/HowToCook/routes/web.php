@@ -30,7 +30,6 @@ Route::get('/email', function(){
 
 
 
-
 #Show the post form
 Route::get('/post/create', [App\Http\Controllers\PostsController::class, 'create']);
 
@@ -46,6 +45,8 @@ Route::patch('/post/{post}/{user}/patch', [App\Http\Controllers\PostsController:
 #Delete the post
 Route::delete('/post/{post}/{user}', [App\Http\Controllers\PostsController::class, 'destroy'])->name('post.destroy');
 
+
+
 #Show profile
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
 
@@ -54,3 +55,6 @@ Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::cla
 
 #Update the profile when profile is already created
 Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'update'])->name('profile.update');
+
+#Delete the profile
+Route::delete('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'destroy'])->name('profile.destroy');

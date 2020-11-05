@@ -1,11 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container .flex-*-wrap">
 
-    <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-        <img src="/svg/BigLogo.svg" style="width: 15%;" alt="logo">
+    <div class="d-flex justify-content-between align-items-baseline">
+        <div class="col-3">
+            <img src="/svg/BigLogo.svg" style="width: 80%;" alt="logo">
+        </div>
+        <!-- Search form -->
+        <form class="col-9" action="/search" method="POST" role="search">
+            {{ csrf_field() }}
+                <div class="input-group">
+                    <input type="text" class="form-control" style="width: 100%;" name="q"
+                        placeholder="Search cooking lessons"> <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+        </form>
     </div>
+
    <div class="row">
        <div class="row pt-5">
 

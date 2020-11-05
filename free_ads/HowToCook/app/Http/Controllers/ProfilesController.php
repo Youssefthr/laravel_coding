@@ -57,4 +57,11 @@ class ProfilesController extends Controller
 
         return redirect("profile/{$user->id}");
     }
+
+    public function destroy(User $user){
+        $this->authorize('update', $user->profile);
+        $User = User::where('id', $user->id)->get()->first();
+        $User->delete();
+        return redirect("home/page0");
+    }
 }
