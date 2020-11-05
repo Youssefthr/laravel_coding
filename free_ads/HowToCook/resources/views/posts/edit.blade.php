@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<form action='/profile/{{ $post->user_id }}' method="post" enctype="multipart/form-data">
+<form action='/post/{{ $post->id }}/{{ $post->user_id }}/patch' method="post" enctype="multipart/form-data">
 {{--protect your application from cross-site request forgery (CSRF) attacks--}}
 @csrf 
 @method('PATCH')

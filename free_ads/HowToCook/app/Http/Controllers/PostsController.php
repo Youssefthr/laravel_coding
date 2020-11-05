@@ -18,13 +18,6 @@ class PostsController extends Controller
         $this->middleware('auth'); ##you need to authenticate if you want to access to other method
     }
 
-    #public function index(){
-        #$posts = Post::orderBy('created_at', 'DESC')->get();
-        #return view('posts/index', compact('posts'));
-        #$post = new Post;
-        #return view('posts/index', compact('post'), compact('page_index'));
-    #}
-
     public function create(){
         return view('posts/create');
     }
@@ -76,16 +69,16 @@ class PostsController extends Controller
 
         if (request('image')) {
             $imagePath = request('image')->store('post', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit (1000, 1000); #cut the image to have perfect square -use intervention/image
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit (1200, 1000); #cut the image to have perfect square -use intervention/image
             $image->save();
             $imageArray = ['image' => $imagePath];
         }
 
-        auth()->user()->post->update(array_merge(
+        $post->update(array_merge(
             $validatedData, 
             $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
         )); #auth means, user has to authenticate if he wants to access to update
 
-        return redirect("profile/{$user->id}");
+        return redirect("profile/{$post->user_id}");
     }
 }   
