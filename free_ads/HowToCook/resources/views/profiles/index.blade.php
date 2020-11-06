@@ -8,23 +8,21 @@
        </div>
        <div class="col-9 pt-5">
        <div class="d-flex justify-content-between align-items-baseline"> 
-            <div><h1></h1></div>
-
-            @can('update', $user->profile)
-            <a href="/post/create"> ADD NEW POST</a>
-            @endcan
-        </div> 
-    <div class='d-flex align-items-start'>
-        @can('update', $user->profile)
-        <a class="pt-2" href="/profile/{{ $user->id }}/edit"> EDIT PROFIL</a>
-        <form method="POST" action="/profile/{{ $user->id }}">
-        @csrf
-        @method('DELETE')
-        <div class="form-group, mb-2 ml-3 pt-0">
-            <input type="submit" class="btn" style="color:red" value="DELETE PROFIL" onclick="return confirm('Are you sure you want to delete this item?');">
+@if($user->id == $me->id || $me->is_admin == "yes")
+            <div>
+               <a href="/post/create"> ADD NEW POST</a>
+           </div> 
+        <div class='d-flex align-items-start'>
+            <a class="pt-2" href="/profile/{{ $user->id }}/edit"> EDIT PROFIL</a>
         </div>
+        <form method="POST" action="/profile/{{ $user->id }}">
+            @csrf
+            @method('DELETE')
+            <div class="form-group, mb-2 ml-3 pt-0">
+                <input type="submit" class="btn" style="color:red" value="DELETE PROFIL" onclick="return confirm('Are you sure you want to delete this item?');">
+            </div>
         </form>
-        @endcan
+@endif
     </div>
             <div class="d-flex">
                 <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>

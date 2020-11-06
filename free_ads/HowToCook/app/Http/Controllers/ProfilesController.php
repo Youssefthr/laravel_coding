@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ProfilesController extends Controller
 {
@@ -14,18 +15,20 @@ class ProfilesController extends Controller
 
 
     public function index(User $user){ #$user is the id of the user
-        return view('profiles/index', compact('user')); #compact function mean 'user' => $use
+        $me = Auth::user();
+        return view('profiles/index', compact('user'), compact('me')); #compact function mean 'user' => $use
     }
 
     public function edit(User $user){
-
-        $this->authorize('update', $user->profile);
-        return view('profiles/edit', compact('user'));
+        $me = Auth::user();
+        if($user->id == $me->id || $me->is_admin == "yes") {
+            return view('profiles/edit', compact('user'));
+        }
     }
 
     public function update(User $user){
-        
-            $this->authorize('update', $user->profile);
+        $me = Auth::user();
+        if($user->id == $me->id || $me->is_admin == "yes") {
             $validatedDataProfile = request()->validate([
                 'title' => 'required',
                 'description' => '',
@@ -43,33 +46,39 @@ class ProfilesController extends Controller
     
             if (request('image')) {
                 $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
-                $image = Image::make(public_path("storage/{$imagePath}"))->fit (1000, 1000); #cut the image to have perfect square -use intervention/image
+                $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000); #cut the image to have perfect square -use intervention/image
                 $image->save();
                 $imageArray = ['image' => $imagePath];
             }
     
-            if(request('password')) {
+            if (request('password')) {
                 $validatedDataUser['password']= Hash::make($validatedDataUser['password']);
             }
             
-            auth()->user()->profile->update(array_merge(
-                $validatedDataProfile, 
+            $user->profile->update(array_merge(
+                $validatedDataProfile,
                 $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
             )); #auth means, user has to authenticate if he wants to access to update
     
-            auth()->user()->update($validatedDataUser); 
+            $user->update($validatedDataUser);
             return redirect("profile/{$user->id}");
-
+        }
     }
 
     public function destroy(User $user){
-        $this->authorize('update', $user->profile);
-        $User = User::where('id', $user->id)->get()->first();
-        $Posts = Post::where('user_id', $user->id)->get()->first();
-        if (isset($Posts)) {
-            $Posts->delete();
+        $me = Auth::user();
+        if($user->id == $me->id || $me->is_admin == "yes") {
+            $User = User::where('id', $user->id) ->get()->first();
+            $Posts = Post::where('user_id', $user->id)->get()->first();
+            if (isset($Posts)) {
+                $Posts->delete();
+            }
+            $User->delete();
+            return redirect("home/page0");
         }
-        $User->delete();
-        return redirect("home/page0");
+        else {
+            return redirect("/home/page0");
+        }
+            
     }
 }
