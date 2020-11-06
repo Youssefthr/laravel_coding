@@ -25,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/home') }}">
+                <a class="navbar-brand d-flex" href="{{ url('/home/page0') }}">
                     <div> <img src="/svg/SmallLogo.svg" alt="logo" style="height: 30px; border-right: 1px solid #333333;"  class="pr-3"> </div>
                     <div class="pl-3"> HowToCook </div>
                 </a>
@@ -69,6 +69,11 @@
                                     <a class="dropdown-item" href="/home/page0">                                                    
                                         {{ __('Home Page') }}
                                     </a>
+                                    @if (Auth::user()->is_admin == 'yes')
+                                    <a class="dropdown-item" href="/admin/page0">                                                    
+                                        {{ __('Admin') }}
+                                    </a>
+                                    @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
