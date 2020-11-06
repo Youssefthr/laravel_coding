@@ -74,3 +74,7 @@ Route::get('/post/search', [App\Http\Controllers\PostSearchController::class, 'i
     #    return view('posts.index')->withDetails($post)->withQuery ( $q );
     #else return view ('posts.index')->withMessage('No Details found. Try to search again !');   
 #});
+
+#Admin dashboard
+
+Route::get('/admin', [App\Http\Controllers\UserController::class, 'index']);

@@ -69,6 +69,11 @@
                                     <a class="dropdown-item" href="/home/page0">                                                    
                                         {{ __('Home Page') }}
                                     </a>
+                                    @if (Auth::user()->is_admin == 'yes')
+                                    <a class="dropdown-item" href="/admin">                                                    
+                                        {{ __('Admin') }}
+                                    </a>
+                                    @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
