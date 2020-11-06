@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     protected $guarded = []; ##tell to Laravel, do not take any gard, i take care myself

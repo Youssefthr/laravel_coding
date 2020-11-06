@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfilesController extends Controller
 {
+
+
+
     public function index(User $user){ #$user is the id of the user
         return view('profiles/index', compact('user')); #compact function mean 'user' => $use
     }
@@ -63,7 +66,9 @@ class ProfilesController extends Controller
         $this->authorize('update', $user->profile);
         $User = User::where('id', $user->id)->get()->first();
         $Posts = Post::where('user_id', $user->id)->get()->first();
-        $Posts->delete();
+        if (isset($Posts)) {
+            $Posts->delete();
+        }
         $User->delete();
         return redirect("home/page0");
     }

@@ -9,17 +9,7 @@
             <img src="/svg/BigLogo.svg" style="width: 80%;" alt="logo">
         </div>
         <!-- Search form -->
-        <form class="col-9" action="/search" method="POST" role="search">
-            {{ csrf_field() }}
-                <div class="input-group">
-                    <input type="text" class="form-control" style="width: 100%;" name="q"
-                        placeholder="Search cooking lessons"> <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-        </form>
+        
     </div>
 
    <div class="row">

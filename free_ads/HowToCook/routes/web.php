@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Input;
 Auth::routes();
 
 #Show home page with post 
-Route::get('/home/page{page_index}', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/home/page{page_index}', [App\Http\Controllers\HomeController::class, 'index'])->name('home.show');
 
 #Change route to logout, redirect to home page 0
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout']);
@@ -61,16 +61,16 @@ Route::delete('/profile/{user}', [App\Http\Controllers\ProfilesController::class
 
 
 #Search bar
-Route::any('/search',function(){
-    $q = Input::get ( 'q' );
-    $post = Post::where('category','LIKE','%'.$q.'%')
-    ->orWhere('description','LIKE','%'.$q.'%')
-    ->orWhere('price','LIKE','%'.$q.'%')
-    ->orWhere('location','LIKE','%'.$q.'%')->get();
-    if(count($post) > 0)
-        return view('posts.index')->withDetails($post)->withQuery ( $q );
-    else return view ('posts.index')->withMessage('No Details found. Try to search again !');
 
-    $arraySearch = array("nickname", "category", "description", "price", "location");
-    
-});
+Route::get('/post/search', [App\Http\Controllers\PostSearchController::class, 'index']);
+
+#Route::any('/search',function(){
+    #$q = Input::get ( 'q' );
+    #$post = Post::where('category','LIKE','%'.$q.'%')
+    #->orWhere('description','LIKE','%'.$q.'%')
+    #->orWhere('price','LIKE','%'.$q.'%')
+    #->orWhere('location','LIKE','%'.$q.'%')->get();
+    #if(count($post) > 0)
+    #    return view('posts.index')->withDetails($post)->withQuery ( $q );
+    #else return view ('posts.index')->withMessage('No Details found. Try to search again !');   
+#});
