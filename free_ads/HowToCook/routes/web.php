@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Mail\NewUserWelcomeMail;
-
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,3 +58,19 @@ Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class,
 
 #Delete the profile
 Route::delete('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'destroy'])->name('profile.destroy');
+
+
+#Search bar
+Route::any('/search',function(){
+    $q = Input::get ( 'q' );
+    $post = Post::where('category','LIKE','%'.$q.'%')
+    ->orWhere('description','LIKE','%'.$q.'%')
+    ->orWhere('price','LIKE','%'.$q.'%')
+    ->orWhere('location','LIKE','%'.$q.'%')->get();
+    if(count($post) > 0)
+        return view('posts.index')->withDetails($post)->withQuery ( $q );
+    else return view ('posts.index')->withMessage('No Details found. Try to search again !');
+
+    $arraySearch = array("nickname", "category", "description", "price", "location");
+    
+});
