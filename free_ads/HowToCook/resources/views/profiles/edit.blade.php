@@ -80,8 +80,7 @@
                     type="email"
                     class="form-control @error('email') is-invalid @enderror"
                     name="email"
-                    value="{{ old('email') ?? $user->email }}"
-                    >   
+                    value="{{ old('email') ?? $user->email }}">   
                     @error('email')
                             <strong>{{ $message }}</strong>
                     @enderror
@@ -123,10 +122,12 @@
                     @enderror
         </div>
 
-        <div class="row pt-4">
-            <button class="btn btn-primary">Save Profile</button>
-
+        <div class='d-flex justify-content-between'>
+                <div class="row pt-4">
+                        <input type="submit" value="Save Profile" name="form_profile_save" >
+                </div>
         </div>
+
     </div>
 </form>
    

@@ -18,13 +18,6 @@ class PostsController extends Controller
         $this->middleware('auth'); ##you need to authenticate if you want to access to other method
     }
 
-    #public function index(){
-        #$posts = Post::orderBy('created_at', 'DESC')->get();
-        #return view('posts/index', compact('posts'));
-        #$post = new Post;
-        #return view('posts/index', compact('post'), compact('page_index'));
-    #}
-
     public function create(){
         return view('posts/create');
     }
@@ -65,27 +58,35 @@ class PostsController extends Controller
     public function update(Post $post){
 
         $this->authorize('update', $post);
-        $validatedData = request()->validate([
-            'caption' => '',
-            'category' => '',
-            'description' => '',
-            'price' => '',
-            'location' => '',
-            'image' => '',
-        ]);
 
-        if (request('image')) {
-            $imagePath = request('image')->store('post', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit (1000, 1000); #cut the image to have perfect square -use intervention/image
-            $image->save();
-            $imageArray = ['image' => $imagePath];
-        }
+            $validatedData = request()->validate([
+                'caption' => '',
+                'category' => '',
+                'description' => '',
+                'price' => '',
+                'location' => '',
+                'image' => '',
+            ]);
+    
+            if (request('image')) {
+                $imagePath = request('image')->store('post', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
+                $image = Image::make(public_path("storage/{$imagePath}"))->fit (1200, 1000); #cut the image to have perfect square -use intervention/image
+                $image->save();
+                $imageArray = ['image' => $imagePath];
+            }
+    
+            $post->update(array_merge(
+                $validatedData, 
+                $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
+            )); #auth means, user has to authenticate if he wants to access to update
+    
+            return redirect("profile/{$post->user_id}");
+    }
 
-        auth()->user()->post->update(array_merge(
-            $validatedData, 
-            $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
-        )); #auth means, user has to authenticate if he wants to access to update
-
-        return redirect("profile/{$user->id}");
+    public function destroy(Post $post){
+            $this->authorize('update', $post);
+            $Post = Post::where('id', $post->id)->get()->first();
+            $Post->delete();
+            return redirect("profile/{$post->user_id}");
     }
 }   

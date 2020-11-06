@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<form action='/profile/{{ $post->user_id }}' method="post" enctype="multipart/form-data">
+<form action='/post/{{ $post->id }}/{{ $post->user_id }}/patch' method="post" enctype="multipart/form-data">
 {{--protect your application from cross-site request forgery (CSRF) attacks--}}
 @csrf 
 @method('PATCH')
@@ -84,12 +84,16 @@
                             <strong>{{ $message }}</strong>
                     @enderror
         </div>
-
-        <div class="row pt-4">
-            <button class="btn btn-primary">Save Post</button>
+        <div class='d-flex justify-content-between'>
+                <div class="row pt-4">
+                        <input type="submit" value="Save Post" name="form_post_save" >
+                </div>
         </div>
     </div>
 </form>
+
+
+
    
 </div>
 @endsection
