@@ -77,4 +77,4 @@ Route::get('/post/search', [App\Http\Controllers\PostSearchController::class, 'i
 
 #Admin dashboard
 
-Route::get('/admin', [App\Http\Controllers\UserController::class, 'index']);
+Route::get('/admin/page{index}', [App\Http\Controllers\UserController::class, 'index']);

@@ -70,7 +70,7 @@
                                         {{ __('Home Page') }}
                                     </a>
                                     @if (Auth::user()->is_admin == 'yes')
-                                    <a class="dropdown-item" href="/admin">                                                    
+                                    <a class="dropdown-item" href="/admin/page0">                                                    
                                         {{ __('Admin') }}
                                     </a>
                                     @endif

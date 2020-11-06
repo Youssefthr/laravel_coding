@@ -25,7 +25,6 @@ class HomeController extends Controller
 
     public function index($page_index, Post $post){ #page number
         $posts = Post::orderBy('created_at', 'DESC')->get();
-        #$post = new Post;
         return view('posts/index', compact('posts'), compact('page_index'));
     }
 }
