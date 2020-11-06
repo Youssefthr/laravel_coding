@@ -1,7 +1,0 @@
-{
-    "require": {
-        "phpzip/phpzip": "^2.0",
-        "jfcherng/php-mb-string": "^1.4",
-        "phpbench/dom": "^0.3.0"
-    }
-}

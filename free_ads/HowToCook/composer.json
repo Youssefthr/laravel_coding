@@ -17,7 +17,10 @@
         "laravel/telescope": "^4.3",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
-        "twbs/bootstrap": "^4.5"
+        "twbs/bootstrap": "^4.5",
+        "phpzip/phpzip": "^2.0",
+        "jfcherng/php-mb-string": "^1.4",
+        "phpbench/dom": "^0.3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
