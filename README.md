@@ -1,4 +1,4 @@
-# All Stars my shop
+# HowToCook 
 
 "How To Cook" is a template of a website displaying ads using  LARAVEL v8, HTML, CSS, PHP and MySQL. You can :
 - authentificate : sign-in, sign-up, log out, log as admin or user
