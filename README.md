@@ -1,4 +1,4 @@
-# All Stars my shop
+# HowToCook 
 
 "How To Cook" is a template of a website displaying ads using  LARAVEL v8, HTML, CSS, PHP and MySQL. You can :
 - authentificate : sign-in, sign-up, log out, log as admin or user
@@ -8,6 +8,8 @@
 It's a collaborative website where you can offer cooking classes for a fee or just participate in cooking classes. 
 
 ## Installation
+
+#### Install PHP and Apache
 
 Download the latest PHP 5 ZIP package from www.php.net/downloads.php.
 Copy ```C:\php\php.ini-development``` to ```C:\php\php.ini```
@@ -41,31 +43,29 @@ Save the configuration file and test it from the command line (Start > Run > cmd
 
 ```httpd -t```
 
-You also need to install mySQL : https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/windows-install-archive.html
+#### Install mySQL
 
-composer require phpzip/phpzip
-composer require jfcherng/php-mb-string
-composer require phpbench/dom
-composer global require laravel/installer
-composer create-project laravel/laravel [nom du fichier]
-php artisan serve
-composer require laravel/ui
-php artisan ui vue —auth
-php artisan ui:auth
+You also need to install ```mySQL``` : https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/windows-install-archive.html
+
+#### Install composer
+
+```brew install composer```
+
+#### Install library
+
+Read composer.json and install all libraries 
+
 ## Usage
 
 ```bash
-php -S localhost:8000;
+php artisan serve
 ```
 Then open a browser with the url :
 
-```http://localhost:8000/index.php```, ```http://localhost:8000/signin.php```, ```http://localhost:8000/signup.php```, ```http://localhost:8000/admin.php```. 
+```http://127.0.0.1:8000/home/page0```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
-
-## Authors and acknowledgment
-Thanks to Jean-Baptiste, Kobi and Estelle who have contributed to this project. 
