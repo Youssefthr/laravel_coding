@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Mail\NewUserWelcomeMail;
-use Illuminate\Support\Facades\Input;
+#use Illuminate\Support\Facades\Input;
+use App\Models\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\Input;
 
 #register and sign in
 Auth::routes();
+
+#Admin dashboard
+Route::get('/admin/page{index}', [App\Http\Controllers\UserController::class, 'index']);
 
 #Show home page with post 
 Route::get('/home/page{page_index}', [App\Http\Controllers\HomeController::class, 'index'])->name('home.show');
@@ -62,19 +66,22 @@ Route::delete('/profile/{user}', [App\Http\Controllers\ProfilesController::class
 
 #Search bar
 
-Route::get('/post/search', [App\Http\Controllers\PostSearchController::class, 'index']);
+#Route::get('/post/search', [App\Http\Controllers\PostSearchController::class, 'index']);
 
-#Route::any('/search',function(){
-    #$q = Input::get ( 'q' );
-    #$post = Post::where('category','LIKE','%'.$q.'%')
-    #->orWhere('description','LIKE','%'.$q.'%')
-    #->orWhere('price','LIKE','%'.$q.'%')
-    #->orWhere('location','LIKE','%'.$q.'%')->get();
-    #if(count($post) > 0)
-    #    return view('posts.index')->withDetails($post)->withQuery ( $q );
-    #else return view ('posts.index')->withMessage('No Details found. Try to search again !');   
-#});
+Route::get ('/search', function () {
+    return view ( 'posts/search' );
+} );
 
-#Admin dashboard
+Route::any('/search',function(){
+    $q = Request::get ( 'q' );
+    $post = Post::where('description','LIKE','%'.$q.'%')
+    ->orWhere('caption','LIKE','%'.$q.'%')
+    ->orWhere('price','LIKE','%'.$q.'%')
+    ->orWhere('location','LIKE','%'.$q.'%')
+    ->orWhere('category','LIKE','%'.$q.'%')
+    ->get();
+    if(count($post) > 0)
+        return view('posts/search')->withDetails($post)->withQuery ( $q );
+    else return view ('posts/notExists');
+});
 
-Route::get('/admin/page{index}', [App\Http\Controllers\UserController::class, 'index']);

@@ -94,4 +94,5 @@ class PostsController extends Controller
             return redirect("profile/{$post->user_id}");
         }
     }
-}   
+}  
+

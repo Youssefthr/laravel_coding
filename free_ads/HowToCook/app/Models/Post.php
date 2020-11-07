@@ -22,7 +22,7 @@ class Post extends Model implements Searchable
 
     public function getSearchResult(): SearchResult
     {         
-       return new SearchResult($this, $this->category, $this->caption, $this->price, $this->price);
+       return new SearchResult($this, $this->category, $this->caption, $this->price, $this->price, $this->location);
     }
 
 }
