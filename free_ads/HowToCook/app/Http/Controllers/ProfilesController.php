@@ -45,8 +45,8 @@ class ProfilesController extends Controller
             ]);
     
             if (request('image')) {
-                $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
-                $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000); #cut the image to have perfect square -use intervention/image
+                $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem");
+                $image = Image::make(public_path("storage/$imagePath"))->fit(1000, 1000); #cut the image to have perfect square -use intervention/image
                 $image->save();
                 $imageArray = ['image' => $imagePath];
             }
