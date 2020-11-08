@@ -38,7 +38,7 @@ class ProfilesController extends Controller
             
             $validatedDataUser = request()->validate([
                 'login' => 'required',
-                'password' => 'required',
+
                 'email' => 'required',
                 'phone' => 'required',
                 'nickname' => 'required',
@@ -50,9 +50,13 @@ class ProfilesController extends Controller
                 $image->save();
                 $imageArray = ['image' => $imagePath];
             }
-    
-            if (request('password')) {
-                $validatedDataUser['password']= Hash::make($validatedDataUser['password']);
+            
+            #dd(strlen(request('password')));
+            if (request('password') !== null && strlen(request('password'))>=8) {
+                $validatedDataUser['password']= Hash::make(request('password'));
+            }
+            elseif (request('password') !== null){
+                echo '<script>alert("Invalid password, 8 characters minimum. Please retry")</script>'; 
             }
             
             $user->profile->update(array_merge(

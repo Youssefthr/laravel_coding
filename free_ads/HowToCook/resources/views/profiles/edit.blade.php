@@ -66,9 +66,7 @@
             <input id="password" 
                     type="password"
                     class="form-control @error('password') is-invalid @enderror"
-                    name="password"
-                    value="{{ old('password') ?? $user->password }}"
-                    >   
+                    name="password">   
                     @error('password')
                             <strong>{{ $message }}</strong>
                     @enderror
