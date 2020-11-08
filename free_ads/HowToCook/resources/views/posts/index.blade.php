@@ -61,7 +61,7 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     @for ($i=0; $i< ceil(count($posts)/9); $i++)
-        <li class="page-item"><a class="page-link" href="/profile/page{{ $i }}">{{ $i+1 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/home/page{{ $i }}">{{ $i+1 }}</a></li>
     @endfor
   </ul>
 </nav>
