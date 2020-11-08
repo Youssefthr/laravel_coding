@@ -586,6 +586,18 @@ pre code {
   margin-left: auto;
 }
 
+
+@media (max-width:540px) {
+
+  .width {
+    width: 50% !important;
+  }
+
+  .image_post {
+    padding-top: 5rem;
+  }
+}
+
 @media (min-width: 576px) {
   .container-sm,
   .container {
