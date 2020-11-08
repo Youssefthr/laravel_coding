@@ -26,13 +26,12 @@
     </div>
             
 
-   <div class="row">
-       <div class="row pt-5">
 
+    <div class="row pt-4 row_phone">
        @for($post=$page_index*9; $post<($page_index+1)*9; $post++)
                     @if(count($posts)>$post)
-                    <diV class="col-4  pl-3 .align-self-*-start">
-                        <div class="pb-2 pl-0"> <img src="/storage/{{ $posts[$post]->image }}" class="w-100" alt="post image"> </div>  
+                    <diV class="col-lg-4 col-md-6 col-sm-8 pl-3 .align-self-*-start">
+                        <div class="pb-2 pl-0"> <img src="/storage/{{ $posts[$post]->image }}" class="w-100 image_post" alt="post image"> </div>  
                             <div>
 
                                 <div class="pb-2" style="font-size:20px">
@@ -47,7 +46,7 @@
                                         <div class="pb-0 mb-3"><i class="material-icons pr-2">&#xe55f;</i> {{ $posts[$post]->location }}</div>  
                                     </div>
                                     @auth
-                                        <div class="pr-3 pb-3"> <a href="/profile/{{ $posts[$post]->user_id }}" class="btn btn-primary">Ready to Cook !</a></div>           
+                                        <div class="pr-3 pb-3"> <a href="mailto:{{ $posts[$post]->user->email }}" class="btn btn-primary">Ready to Cook !</a></div>           
                                     @else
                                         <div class="pr-3 pb-3"> <a href="{{ route('register') }}" class="btn btn-primary">Ready to Cook !</a></div>
                                     @endif
@@ -56,7 +55,6 @@
                     </div>
                 @endif
             @endfor
-       </div>
    </div>
 </div>
 
