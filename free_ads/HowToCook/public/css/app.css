@@ -586,19 +586,12 @@ pre code {
   margin-left: auto;
 }
 
-@media (max-width:540px) {
-  .image_post {
-    padding-top: 5rem;
-  }
-}
-
 @media (min-width: 576px) {
   .container-sm,
   .container {
     max-width: 540px;
   }
 }
-
 
 @media (min-width: 768px) {
   .container-md,
