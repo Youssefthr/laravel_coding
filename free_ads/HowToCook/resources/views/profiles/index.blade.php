@@ -36,7 +36,7 @@
     <div class="d-flex flex-wrap pt-5">
             @foreach($user->posts as $post)
                     <div class="col-lg-4 col-md-6 col-sm-8 pl-3 .align-self-*-start">
-                        <div class="pb-2 pl-0"> <img src="{{ $post->image }}" class="w-100 image_post" alt="post image"> </div>  
+                        <div class="pb-2 pl-0"> <img src="/storage/{{ $post->image }}" class="w-100 image_post" alt="post image"> </div>  
                             <div>
                                 <div class="pb-2 " style="font-size:20px">{{ $post->caption }} by <span style="color:#3490dc"> {{ $post->user->nickname }} </span></div>
                                 <div class="d-flex flex-column align-items-start justify-content-between">

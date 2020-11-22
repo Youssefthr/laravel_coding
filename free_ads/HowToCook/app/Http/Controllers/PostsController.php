@@ -33,7 +33,7 @@ class PostsController extends Controller
             'image' => ['required', 'image'],
         ]);
         
-        $imagePath = request('image')->store('uploads', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
+        $imagePath = request('image')->store('post', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
         
         $image = Image::make(public_path("storage/{$imagePath}"))->fit (1200, 1000); #cut the image to have perfect square -use intervention/image
         $image->save();
@@ -70,9 +70,10 @@ class PostsController extends Controller
                 'image' => '',
             ]);
     
-            if (request('image')) {
-                $imagePath = request('image')->store('post', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
+            if (request('image')) { # maybe switch 'post' by 'uploads'
+                $imagePath = request('image')->store('uploads', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem
                 $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1000); #cut the image to have perfect square -use intervention/image
+       
                 $image->save();
                 $imageArray = ['image' => $imagePath];
             }
